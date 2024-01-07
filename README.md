@@ -1,3 +1,3 @@
-# roundabout simulator
+## roundabout simulator
 
-11th grade Expo-science subject - with THREE.js and VITE, made in Javascript
+11th grade Expo-science subject: a roundabout simulation using real datas collected irl. Created in Javascript with THREE.js and VITE.
