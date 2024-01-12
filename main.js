@@ -11,7 +11,7 @@ document.body.appendChild(renderer.domElement);
 
 window.scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-camera.position.set(0, 80, 100);
+camera.position.set(0, 120, 120);
 
 window.addEventListener('resize', () => {
 	camera.aspect = window.innerWidth / window.innerHeight;
@@ -24,7 +24,7 @@ controls.autoRotate = true;
 controls.autoRotateSpeed = 0.5;
 
 /* ~~~~ DEV ~~~ */
-const IS_AI_TRAINING = true;
+window.IS_AI_TRAINING = true;
 
 /* ~~~~~~~~~ */
 import { plateGroup } from '/static/baseplate.js';
@@ -45,5 +45,9 @@ function animate() {
 	requestAnimationFrame(animate);
 }
 
-new Car(0, -120);
+new Car(0, 0);
+new Car(1, 0);
+new Car(2, 0);
+new Car(3, 0);
+
 animate();

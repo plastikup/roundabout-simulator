@@ -4,9 +4,9 @@ import { materials } from './materials.js';
 
 export const plateGroup = (() => {
 	const plateGroup = new THREE.Group();
-	const laneSize = 15;
+	const doubleLaneSize = 15;
 	const innerCircleDiameter = 30;
-	const outerCircleDiameter = innerCircleDiameter + laneSize / 1.5;
+	const outerCircleDiameter = innerCircleDiameter + doubleLaneSize / 1.5;
 	const asphaltHeight = 2;
 	const viewportDimension = 250;
 
@@ -17,8 +17,8 @@ export const plateGroup = (() => {
 	// grass zone
 	const viewportVolume = new THREE.Mesh(new THREE.BoxGeometry(viewportDimension, asphaltHeight, viewportDimension), materials.grass);
 	const centerOuterVolume = new THREE.Mesh(new THREE.CylinderGeometry(outerCircleDiameter, outerCircleDiameter, asphaltHeight, 32));
-	const lane1Volume = new THREE.Mesh(new THREE.BoxGeometry(viewportDimension, asphaltHeight, laneSize));
-	const lane2Volume = new THREE.Mesh(new THREE.BoxGeometry(laneSize, asphaltHeight, viewportDimension));
+	const lane1Volume = new THREE.Mesh(new THREE.BoxGeometry(viewportDimension, asphaltHeight, doubleLaneSize));
+	const lane2Volume = new THREE.Mesh(new THREE.BoxGeometry(doubleLaneSize, asphaltHeight, viewportDimension));
 	const grass = CSG.subtract(viewportVolume, CSG.union(centerOuterVolume, CSG.union(lane1Volume, lane2Volume)));
 	grass.position.y = asphaltHeight / 2;
 
@@ -27,9 +27,9 @@ export const plateGroup = (() => {
 	const centerCirculation = CSG.subtract(outerCircleFlat, centerInner);
 
 	// lanes
-	let lane1Flat = new THREE.Mesh(new THREE.BoxGeometry(viewportDimension, 0.5, laneSize), materials.road1);
+	let lane1Flat = new THREE.Mesh(new THREE.BoxGeometry(viewportDimension, 0.5, doubleLaneSize), materials.road1);
 	lane1Flat = CSG.subtract(lane1Flat, outerCircleFlat);
-	let lane2Flat = new THREE.Mesh(new THREE.BoxGeometry(laneSize, 0.5, viewportDimension), materials.road2);
+	let lane2Flat = new THREE.Mesh(new THREE.BoxGeometry(doubleLaneSize, 0.5, viewportDimension), materials.road2);
 	lane2Flat = CSG.subtract(lane2Flat, outerCircleFlat);
 
 	plateGroup.add(grass, centerInner, centerCirculation, lane1Flat, lane2Flat);
